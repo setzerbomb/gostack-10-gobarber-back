@@ -13,6 +13,10 @@ class UserDAO {
     return await User.findByPk(id);
   }
 
+  async findAll(query) {
+    return await User.findAll(query);
+  }
+
   async delete() {}
 
   async list() {}

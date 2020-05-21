@@ -9,7 +9,9 @@ class UserDAO {
     return await User.findOne(query);
   }
 
-  async update() {}
+  async findByID(id) {
+    return await User.findByPk(id);
+  }
 
   async delete() {}
 

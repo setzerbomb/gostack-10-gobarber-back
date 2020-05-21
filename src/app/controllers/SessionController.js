@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import message from '../common/message';
 import UserDAO from '../DAO/UserDAO';
 
 import authConfig from '../../config/auth';
@@ -13,8 +14,6 @@ class SessionController {
       if (await user.checkPassword(password)) {
         const { id, name } = user;
 
-        console.log(authConfig);
-
         return res.json({
           user: { id, name, email },
           token: jwt.sign({ id }, authConfig.secret, {
@@ -22,10 +21,9 @@ class SessionController {
           }),
         });
       }
-      return res.status(401).json({ error: 'Password does not match' });
+      return message(res, 401, 'Password does not match');
     }
-
-    return res.status(401).json({ error: 'User not found' });
+    return message(res, 401, 'User not found');
   }
 }
 

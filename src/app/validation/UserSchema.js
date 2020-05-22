@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 import message from '../common/message';
+import validate from '../common/validate';
 
 export default {
   store: async (req, res, next) => {
@@ -10,13 +11,7 @@ export default {
       password: Yup.string().required().min(6),
     });
 
-    try {
-      await schema.validate(req.body);
-    } catch (e) {
-      return message(res, 400, e.message);
-    }
-
-    return next();
+    return await validate(req.body, schema, next, (e) => message(res, 400, e));
   },
   update: async (req, res, next) => {
     const schema = Yup.object().shape({
@@ -33,12 +28,6 @@ export default {
       ),
     });
 
-    try {
-      await schema.validate(req.body);
-    } catch (e) {
-      return message(res, 400, e.message);
-    }
-
-    return next();
+    return await validate(req.body, schema, next, (e) => message(res, 400, e));
   },
 };

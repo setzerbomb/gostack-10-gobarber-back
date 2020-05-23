@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
-import message from '../common/message';
-import validate from '../common/validate';
+import message from '../../common/message';
+import validate from '../../common/validate';
 
 export default {
   store: async (req, res, next) => {

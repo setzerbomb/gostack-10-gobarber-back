@@ -1,3 +1,11 @@
+/**
+ * Generic express message response
+ *
+ * @param {Express.Response} res
+ * @param {number} status
+ * @param {string} message
+ * @param {boolean} error
+ */
 export default function (
   res,
   status = 401,

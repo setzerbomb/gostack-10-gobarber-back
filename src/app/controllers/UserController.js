@@ -7,7 +7,7 @@ class UserController {
       return message(res, 400, 'User already exists');
     }
 
-    const { id, name, email, provider } = await UserDAO.store(req.body);
+    const { id, name, email, provider } = await UserDAO.create(req.body);
 
     return res.json({ id, name, email, provider });
   }
@@ -15,7 +15,7 @@ class UserController {
   async update(req, res) {
     const { email, oldPassword } = req.body;
 
-    const user = await UserDAO.findByID(req.userID);
+    const user = await UserDAO.findByPk(req.userID);
 
     if (email && email !== user.email) {
       if (await UserDAO.findUserByEmail(email)) {

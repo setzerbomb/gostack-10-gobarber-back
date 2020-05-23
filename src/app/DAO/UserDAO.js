@@ -1,15 +1,15 @@
 import User from '../models/User';
 
 class UserDAO {
-  async store(data) {
+  async create(data) {
     return await User.create(data);
   }
 
-  async find(query) {
+  async findOne(query) {
     return await User.findOne(query);
   }
 
-  async findByID(id) {
+  async findByPk(id) {
     return await User.findByPk(id);
   }
 

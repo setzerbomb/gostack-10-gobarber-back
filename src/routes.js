@@ -7,11 +7,16 @@ import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import ProviderController from './app/controllers/ProviderController';
 import AppointmentController from './app/controllers/AppointmentController';
+import ScheduleController from './app/controllers/ScheduleController';
+import NotificationController from './app/controllers/NotificationController';
 
-import UserSchemaValidation from './app/validation/UserSchema';
-import AppointmentSchemaValidation from './app/validation/AppointmentSchema';
+import UserSchemaValidation from './app/middlewares/validation/UserSchema';
+import AppointmentSchemaValidation from './app/middlewares/validation/AppointmentSchema';
+import ScheduleSchemaValidation from './app/middlewares/validation/ScheduleSchema';
 
-import authMiddleware from './app/middlewares/auth';
+import isProvider from './app/middlewares/auth/isProvider';
+
+import authMiddleware from './app/middlewares/auth/auth';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -32,5 +37,15 @@ routes.post(
   AppointmentSchemaValidation.store,
   AppointmentController.store
 );
+routes.get('/appointments', AppointmentController.index);
+
+routes.get(
+  '/schedule',
+  isProvider,
+  ScheduleSchemaValidation.index,
+  ScheduleController.index
+);
+
+routes.get('/notifications', isProvider, NotificationController.index);
 
 export default routes;

@@ -9,6 +9,7 @@ import ProviderController from './app/controllers/ProviderController';
 import AppointmentController from './app/controllers/AppointmentController';
 import ScheduleController from './app/controllers/ScheduleController';
 import NotificationController from './app/controllers/NotificationController';
+import AvailableController from './app/controllers/AvailableController';
 
 import UserSchemaValidation from './app/middlewares/validation/UserSchema';
 import AppointmentSchemaValidation from './app/middlewares/validation/AppointmentSchema';
@@ -31,6 +32,7 @@ routes.put('/users', UserSchemaValidation.update, UserController.update);
 routes.post('/files', upload.single('file'), FileController.store);
 
 routes.get('/providers', ProviderController.index);
+routes.get('/providers/:providerId/available', AvailableController.index);
 
 routes.post(
   '/appointments',

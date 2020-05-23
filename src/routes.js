@@ -38,6 +38,7 @@ routes.post(
   AppointmentController.store
 );
 routes.get('/appointments', AppointmentController.index);
+routes.delete('/appointments/:id', AppointmentController.delete);
 
 routes.get(
   '/schedule',
@@ -47,5 +48,6 @@ routes.get(
 );
 
 routes.get('/notifications', isProvider, NotificationController.index);
+routes.put('/notifications/:id', isProvider, NotificationController.update);
 
 export default routes;

@@ -17,8 +17,6 @@ class UserDAO {
     return await User.findAll(query);
   }
 
-  async delete() {}
-
   async findUserByEmail(email) {
     return await User.findOne({
       where: {
